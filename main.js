@@ -193,3 +193,4 @@
   };
 
 }();
+githubOfLife.start();
