@@ -124,6 +124,34 @@
     return aliveNeighbours;
   };
 
+  var getMajorityColour = function(rects){
+    //    dead, first, second, third, fourth
+    var cIndex = ['dead', 'first', 'second', 'third', 'fourth'];
+    var cumulativeColours = [0,0,0,0,0];
+    $.each(rects, function(index, rect){
+      // Get the colour
+      switch(getRectColor(rect)){
+        case COLOURS.dead:
+          cumulativeColours[0]++;
+          break;
+        case COLOURS.fourth:
+          cumulativeColours[4]++;
+          break;
+        case COLOURS.third:
+          cumulativeColours[3]++;
+          break;
+        case COLOURS.second:
+          cumulativeColours[2]++;
+          break;
+        case COLOURS.first:
+          cumulativeColours[1]++;
+          break;
+      }
+    });
+    // Return max
+    return COLOURS[cIndex[cumulativeColours.indexOf(Math.max(cumulativeColours[0], cumulativeColours[1], cumulativeColours[2], cumulativeColours[3], cumulativeColours[4]))]];
+  };
+
   var nextStep = function(){
     /*
      For a space that is 'populated':
@@ -142,8 +170,7 @@
         if(isAlive(rect) && (numAliveNeighbours <= 1 || numAliveNeighbours >= 4)){
           killRect(rect);
         } else if(!isAlive(rect) && (numAliveNeighbours == 3)) {
-          // TODO Creation by colour
-          setRect(rect, COLOURS.first);
+          setRect(rect, getMajorityColour(aliveNeighbours));
         }
       }
     }
