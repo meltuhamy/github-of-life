@@ -1,7 +1,7 @@
 GitHub of Life
 ==============
 
-Game of life using the commit calendar on GitHub :P
+[Game of life](http://pmav.eu/stuff/javascript-game-of-life-v3.1.1/) using the commit calendar on GitHub :P
 
 How to run
 ----------
